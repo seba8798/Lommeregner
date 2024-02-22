@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LommeregnerV2.MainPage"
+             x:Name="MainPageInstance"
+             BackgroundColor="#212121">
+    <VerticalStackLayout Padding="30" Spacing="20">
+
+        <Label 
+            Text="Welcome to worlds best Calculator!"
+            FontSize="20"
+            FontAttributes="Bold"
+            TextColor="White"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand" />
+
+        <Button 
+            Text="Create New Calculator"
+            FontSize="18"
+            BackgroundColor="#4CAF50"
+            TextColor="White"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            Command="{Binding NewCalculator}"
+            />
+
+        <StackLayout BindingContext="{Binding}" BindableLayout.ItemsSource="{Binding Calculators}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button Margin="5" 
+                            Text="{Binding Name}" 
+                            Command="{Binding BindingContext.OpenCalculator, Source={x:Reference MainPageInstance}}" 
+                            CommandParameter="{Binding}"
+                            />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

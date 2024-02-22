@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LommeregnerV2.CalV1"
+             BackgroundColor="#212121"
+             Shell.NavBarIsVisible="False">
+
+    <Grid x:Name="Grids" Padding="8"
+          RowDefinitions="*,*,*,*,*,*"
+          ColumnDefinitions="*,*,*,*">
+
+
+        <Entry Grid.ColumnSpan="6"
+               TextColor="White"
+               BackgroundColor="#212121"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               Text="{Binding DisplayText}"
+               IsReadOnly="True"
+               HorizontalTextAlignment="End"
+               FontSize="30" />
+
+
+        <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="Black" FontSize="15" BackgroundColor="White" Command="{Binding BackButton}" VerticalOptions="Start" HorizontalOptions="Start"  />
+        <Button Grid.Row="0" Grid.Column="3" Text="Try V2" TextColor="Black" FontSize="15" BackgroundColor="White" Command="{Binding V2}" Margin="0" VerticalOptions="Start" HorizontalOptions="End"  />
+
+
+        <!-- Calculator buttons -->
+
+        <Button Grid.Row="1" Grid.Column="0" Text="7" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="7" Margin="5" VerticalOptions="FillAndExpand"  />
+        <Button Grid.Row="1" Grid.Column="1" Text="8" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="8" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="1" Grid.Column="2" Text="9" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="9" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="1" Grid.Column="3" Text="/" TextColor="White" BackgroundColor="#f57c00" Command="{Binding OperationCommand}" CommandParameter="/" Margin="5" VerticalOptions="FillAndExpand" />
+
+        <Button Grid.Row="2" Grid.Column="0" Text="4" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="4" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="2" Grid.Column="1" Text="5" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="5" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="2" Grid.Column="2" Text="6" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="6" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="2" Grid.Column="3" Text="*" TextColor="White" BackgroundColor="#f57c00" Command="{Binding OperationCommand}" CommandParameter="*" Margin="5" VerticalOptions="FillAndExpand" />
+
+        <Button Grid.Row="3" Grid.Column="0" Text="1" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="1" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="3" Grid.Column="1" Text="2" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="2" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="3" Grid.Column="2" Text="3" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="3" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="3" Grid.Column="3" Text="-" TextColor="White" BackgroundColor="#f57c00" Command="{Binding OperationCommand}" CommandParameter="-" Margin="5" VerticalOptions="FillAndExpand" />
+
+        <Button Grid.Row="4" Grid.Column="0" Text="0" FontSize="13" TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="0" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="4" Grid.Column="1" Text="." TextColor="White" BackgroundColor="#424242" Command="{Binding NumberCommand}" CommandParameter="." Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="4" Grid.Column="2" Text="=" TextColor="White" BackgroundColor="#424242" Command="{Binding EqualsCommand}" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="4" Grid.Column="3" Text="+" FontSize="Medium" TextColor="White" BackgroundColor="#f57c00" Command="{Binding OperationCommand}" CommandParameter="+" Margin="5" VerticalOptions="FillAndExpand" />
+
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Clear" TextColor="White" BackgroundColor="#f57c00" Command="{Binding ClearCommand}" Margin="5" VerticalOptions="FillAndExpand" />
+        <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Text="Backspace" TextColor="White" BackgroundColor="#f57c00" Command="{Binding BackspaceCommand}" Margin="5" VerticalOptions="FillAndExpand" />
+
+
+    </Grid>
+</ContentPage>

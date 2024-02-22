@@ -12,14 +12,15 @@
 
 
         <Entry Grid.ColumnSpan="6"
-               TextColor="#212121"
-               BackgroundColor="White"
-               HorizontalOptions="CenterAndExpand"
-               VerticalOptions="CenterAndExpand"
-               Text="{Binding DisplayText, Mode=TwoWay}"
-               IsReadOnly="True"
-               HorizontalTextAlignment="End"
-               FontSize="30" />
+       TextColor="#212121"
+       BackgroundColor="White"
+       HorizontalOptions="CenterAndExpand"
+       VerticalOptions="CenterAndExpand"
+       Text="{Binding DisplayTextV2, Mode=TwoWay}"
+       IsReadOnly="True"
+       HorizontalTextAlignment="End"
+       FontSize="30" />
+
 
         <!-- Calculator buttons -->
         <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding BackButton}" VerticalOptions="Start" HorizontalOptions="Start"  />

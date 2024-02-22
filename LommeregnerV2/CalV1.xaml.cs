@@ -13,7 +13,7 @@ namespace LommeregnerV2
         {
             InitializeComponent();
             CreationTime = DateTime.Now;
-            _viewModel = new CalculatorViewModel(this); 
+            _viewModel = new CalculatorViewModel(); 
             BindingContext = _viewModel;
         }
     }

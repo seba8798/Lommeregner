@@ -9,7 +9,6 @@ public partial class CalV2 : ContentPage
     public CalV2(CalculatorViewModel viewModel)
     {
         InitializeComponent();
-        DisplayText = viewModel.DisplayText;
         BindingContext = viewModel;
     }
 }

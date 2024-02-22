@@ -11,14 +11,15 @@
 
 
         <Entry Grid.ColumnSpan="6"
-               TextColor="White"
-               BackgroundColor="#212121"
-               HorizontalOptions="CenterAndExpand"
-               VerticalOptions="CenterAndExpand"
-               Text="{Binding DisplayText}"
-               IsReadOnly="True"
-               HorizontalTextAlignment="End"
-               FontSize="30" />
+       TextColor="White"
+       BackgroundColor="#212121"
+       HorizontalOptions="CenterAndExpand"
+       VerticalOptions="CenterAndExpand"
+       Text="{Binding DisplayTextV1}"
+       IsReadOnly="True"
+       HorizontalTextAlignment="End"
+       FontSize="30" />
+
 
 
         <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="Black" FontSize="15" BackgroundColor="White" Command="{Binding BackButton}" VerticalOptions="Start" HorizontalOptions="Start"  />

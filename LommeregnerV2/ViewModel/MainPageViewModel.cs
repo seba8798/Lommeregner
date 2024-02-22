@@ -20,7 +20,7 @@ namespace LommeregnerV2.ViewModel
             NewCalculator = new Command(() =>
             {
                 var calculator = new CalV1(); // Opret en ny instans af CalV1 for hver lommeregner
-                var calculatorViewModel = new CalculatorViewModel(calculator);
+                var calculatorViewModel = new CalculatorViewModel();
                 calculator.BindingContext = calculatorViewModel;
                 calculator.Name = DateTime.Now.ToString();
                 Calculators.Add(calculator);

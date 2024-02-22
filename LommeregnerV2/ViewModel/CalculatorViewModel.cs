@@ -1,16 +1,16 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using LommeregnerV2.Interface;
 
 namespace LommeregnerV2.ViewModel
 {
-
-    public class CalculatorViewModel : INotifyPropertyChanged
+    public class CalculatorViewModel : ObservableRecipient, ICalculatorViewModel
     {
         private double currentNumber, resultNumber;
-
         private string? currentOperation;
         private bool isResultDisplayed;
         private string displayText = string.Empty;
@@ -18,38 +18,22 @@ namespace LommeregnerV2.ViewModel
         public string DisplayText
         {
             get { return displayText; }
-            set
-            {
-                if (displayText != value)
-                {
-                    displayText = value;
-                    OnPropertyChanged();
-                }
-            }
+            set { SetProperty(ref displayText, value); }
         }
 
+        public ICommand OperationCommand { get; }
+        public ICommand EqualsCommand { get; }
+        public ICommand NumberCommand { get; }
+        public ICommand ClearCommand { get; }
+        public ICommand BackspaceCommand { get; }
 
-
-        public CalV1 CurrentCalculator { get; set; }
-        public RelayCommand<string> OperationCommand { get; }
-        public RelayCommand EqualsCommand { get; }
-        public RelayCommand<string> NumberCommand { get; }
-        public RelayCommand ClearCommand { get; }
-        public RelayCommand BackspaceCommand { get; }
-        public RelayCommand BackButton { get; }
-        public RelayCommand V2 { get; }
-
-
-        public CalculatorViewModel(CalV1 currentCalculator)
+        public CalculatorViewModel()
         {
-            CurrentCalculator = currentCalculator;
             OperationCommand = new RelayCommand<string>(OnOperationClicked);
             EqualsCommand = new RelayCommand(OnEqualsClicked);
             NumberCommand = new RelayCommand<string>(OnNumberClicked);
             ClearCommand = new RelayCommand(OnClearClicked);
             BackspaceCommand = new RelayCommand(OnBackspaceClicked);
-            BackButton = new RelayCommand(OnBackButton);
-            V2 = new RelayCommand(OnV2);
         }
         private void OnV2()
         {

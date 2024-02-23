@@ -4,7 +4,8 @@ namespace LommeregnerV2.Interface
 {
     public interface ICalculatorViewModel
     {
-        string DisplayText { get; set; }
+        string DisplayTextV1 { get; set; }
+        string DisplayTextV2 { get; set; }
         ICommand OperationCommand { get; }
         ICommand EqualsCommand { get; }
         ICommand NumberCommand { get; }

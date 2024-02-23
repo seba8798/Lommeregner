@@ -13,12 +13,20 @@ namespace LommeregnerV2.ViewModel
         private double currentNumber, resultNumber;
         private string? currentOperation;
         private bool isResultDisplayed;
-        private string displayText = string.Empty;
 
-        public string DisplayText
+        private string displayTextV1 = string.Empty;
+        private string displayTextV2 = string.Empty;
+
+        public string DisplayTextV1
         {
-            get { return displayText; }
-            set { SetProperty(ref displayText, value); }
+            get { return displayTextV1; }
+            set { SetProperty(ref displayTextV1, value); }
+        }
+
+        public string DisplayTextV2
+        {
+            get { return displayTextV2; }
+            set { SetProperty(ref displayTextV2, value); }
         }
 
         public ICommand OperationCommand { get; }
@@ -26,6 +34,9 @@ namespace LommeregnerV2.ViewModel
         public ICommand NumberCommand { get; }
         public ICommand ClearCommand { get; }
         public ICommand BackspaceCommand { get; }
+        public ICommand V1BackButton { get; }
+        public ICommand V2 { get; }
+        public ICommand V2BackButton { get; }
 
         public CalculatorViewModel()
         {
@@ -34,25 +45,57 @@ namespace LommeregnerV2.ViewModel
             NumberCommand = new RelayCommand<string>(OnNumberClicked);
             ClearCommand = new RelayCommand(OnClearClicked);
             BackspaceCommand = new RelayCommand(OnBackspaceClicked);
+            V1BackButton = new RelayCommand(OnV1BackButton);
+            V2 = new RelayCommand(OnV2);
+            V2BackButton = new RelayCommand(OnV2BackButton);
         }
-        private void OnV2()
-        {
-            App.Current.MainPage.Navigation.PushAsync(new CalV2(this));
-        }
-        private void OnBackButton()
+
+        private void OnV2BackButton()
         {
             App.Current.MainPage.Navigation.PopAsync();
         }
+        //private async void OnV2(string displayTextV1)
+        //{
+        //    await App.Current.MainPage.Navigation.PushAsync(new CalV2(this, displayTextV1));
+        //}
+        private async void OnV2()
+        {
+            string DisplayText = DisplayTextV1; // Get the value of DisplayTextV1
+            string uriString = $"///CalV2?displayTextV1={Uri.EscapeDataString(DisplayText)}";
+            await Shell.Current.GoToAsync(uriString);
+        }
+
+        private void OnV1BackButton()
+        {
+            App.Current.MainPage.Navigation.PopAsync();
+            App.Current.MainPage.Navigation.PopAsync();
+
+        }
+
         private void OnOperationClicked(string operation)
         {
-            if (string.IsNullOrEmpty(DisplayText) || !double.TryParse(DisplayText, out currentNumber))
+            //DisplayTextV1
+            if (string.IsNullOrEmpty(DisplayTextV1) || !double.TryParse(DisplayTextV1, out currentNumber))
             {
                 return;
             }
             else
             {
-                currentOperation = operation;
-                DisplayText = string.Empty;
+                currentOperation
+                    = operation;
+                DisplayTextV1 = string.Empty;
+                isResultDisplayed = false;
+            }
+            //DisplayTextV2
+            if (string.IsNullOrEmpty(DisplayTextV2) || !double.TryParse(DisplayTextV2, out currentNumber))
+            {
+                return;
+            }
+            else
+            {
+                currentOperation
+                    = operation;
+                DisplayTextV2 = string.Empty;
                 isResultDisplayed = false;
             }
         }
@@ -60,27 +103,28 @@ namespace LommeregnerV2.ViewModel
 
         private async void OnEqualsClicked()
         {
-            if (double.TryParse(DisplayText, out double nextNumber))
+            //DisplayTextV1
+            if (double.TryParse(DisplayTextV1, out double nextNumberV1))
             {
                 try
                 {
                     switch (currentOperation)
                     {
                         case "+":
-                            resultNumber = currentNumber + nextNumber;
+                            resultNumber = currentNumber + nextNumberV1;
                             break;
                         case "-":
-                            resultNumber = currentNumber - nextNumber;
+                            resultNumber = currentNumber - nextNumberV1;
                             break;
                         case "*":
-                            resultNumber = currentNumber * nextNumber;
+                            resultNumber = currentNumber * nextNumberV1;
                             break;
                         case "/":
-                            if (nextNumber == 0)
+                            if (nextNumberV1 == 0)
                             {
                                 throw new DivideByZeroException();
                             }
-                            resultNumber = currentNumber / nextNumber;
+                            resultNumber = currentNumber / nextNumberV1;
                             break;
                         default:
                             throw new InvalidOperationException("Unsupported operation");
@@ -88,16 +132,17 @@ namespace LommeregnerV2.ViewModel
 
                     if (resultNumber == Math.Truncate(resultNumber))
                     {
-                        DisplayText = resultNumber.ToString("F0");
+                        DisplayTextV1 = resultNumber.ToString("F0");
                     }
                     else if (resultNumber == Math.Round(resultNumber, 2))
                     {
-                        DisplayText = resultNumber.ToString("F2");
+                        DisplayTextV1 = resultNumber.ToString("F2");
                     }
                     else
                     {
-                        DisplayText = resultNumber.ToString("F10");
+                        DisplayTextV1 = resultNumber.ToString("F10");
                     }
+
                     if (resultNumber == 69 || resultNumber == 80085)
                     {
                         await MainThread.InvokeOnMainThreadAsync(async () =>
@@ -110,37 +155,105 @@ namespace LommeregnerV2.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    DisplayText = ex.Message;
+                    DisplayTextV1 = ex.Message;
                 }
             }
             else
             {
-                DisplayText = "Invalid input";
+                DisplayTextV1 = "Invalid input";
+            }
+
+            //DisplayTextV2
+            if (double.TryParse(DisplayTextV2, out double nextNumberV2))
+            {
+                try
+                {
+                    switch (currentOperation)
+                    {
+                        case "+":
+                            resultNumber = currentNumber + nextNumberV2;
+                            break;
+                        case "-":
+                            resultNumber = currentNumber - nextNumberV2;
+                            break;
+                        case "*":
+                            resultNumber = currentNumber * nextNumberV2;
+                            break;
+                        case "/":
+                            if (nextNumberV2 == 0)
+                            {
+                                throw new DivideByZeroException();
+                            }
+                            resultNumber = currentNumber / nextNumberV2;
+                            break;
+                        default:
+                            throw new InvalidOperationException("Unsupported operation");
+                    }
+
+                    if (resultNumber == Math.Truncate(resultNumber))
+                    {
+                        DisplayTextV2 = resultNumber.ToString("F0");
+                    }
+                    else if (resultNumber == Math.Round(resultNumber, 2))
+                    {
+                        DisplayTextV2 = resultNumber.ToString("F2");
+                    }
+                    else
+                    {
+                        DisplayTextV2 = resultNumber.ToString("F10");
+                    }
+
+                    if (resultNumber == 69 || resultNumber == 80085)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(async () =>
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Toast", "Nice!", "OK");
+                        });
+                    }
+
+                    isResultDisplayed = true;
+                }
+                catch (Exception ex)
+                {
+                    DisplayTextV2 = ex.Message;
+                }
+            }
+            else
+            {
+                DisplayTextV2 = "Invalid input";
             }
         }
+
 
         private void OnNumberClicked(string number)
         {
             if (isResultDisplayed)
             {
-                DisplayText = string.Empty;
+                DisplayTextV1 = string.Empty;
+                DisplayTextV2 = string.Empty;
                 isResultDisplayed = false;
             }
 
-            DisplayText += number;
+            DisplayTextV1 += number;
+            DisplayTextV2 += number;
         }
 
 
         private void OnClearClicked()
         {
-            DisplayText = string.Empty;
+            DisplayTextV1 = string.Empty;
+            DisplayTextV2 = string.Empty;
         }
 
         private void OnBackspaceClicked()
         {
-            if (!string.IsNullOrEmpty(DisplayText))
+            if (!string.IsNullOrEmpty(DisplayTextV1))
             {
-                DisplayText = DisplayText.Substring(0, DisplayText.Length - 1);
+                DisplayTextV1 = DisplayTextV1.Substring(0, DisplayTextV1.Length - 1);
+            }
+            if (!string.IsNullOrEmpty(DisplayTextV2))
+            {
+                DisplayTextV2 = DisplayTextV2.Substring(0, DisplayTextV2.Length - 1);
             }
         }
 

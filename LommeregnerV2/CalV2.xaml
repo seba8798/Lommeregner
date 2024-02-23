@@ -16,14 +16,14 @@
        BackgroundColor="White"
        HorizontalOptions="CenterAndExpand"
        VerticalOptions="CenterAndExpand"
-       Text="{Binding DisplayTextV2, Mode=TwoWay}"
+       Text="{Binding DisplayTextV2}"
        IsReadOnly="True"
        HorizontalTextAlignment="End"
        FontSize="30" />
 
 
         <!-- Calculator buttons -->
-        <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding BackButton}" VerticalOptions="Start" HorizontalOptions="Start"  />
+        <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding V2BackButton}" VerticalOptions="Start" HorizontalOptions="Start"  />
         <Button Grid.Row="0" Grid.Column="3" Text="Get Data" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding GetData}" Margin="0" VerticalOptions="Start" HorizontalOptions="End"  />
 
 

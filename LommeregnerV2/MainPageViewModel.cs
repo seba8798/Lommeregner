@@ -24,6 +24,7 @@ namespace LommeregnerV2.ViewModel
                 calculator.BindingContext = calculatorViewModel;
                 calculator.Name = DateTime.Now.ToString();
                 Calculators.Add(calculator);
+
                 Shell.Current.Navigation.PushAsync(calculator);
             });
             OpenCalculator = new Command<CalV1>(calculator =>
@@ -31,5 +32,6 @@ namespace LommeregnerV2.ViewModel
                 Shell.Current.Navigation.PushAsync(calculator);
             });
         }
+
     }
 }

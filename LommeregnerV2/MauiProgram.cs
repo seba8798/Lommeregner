@@ -27,9 +27,10 @@ namespace LommeregnerV2
 #endif
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainPageViewModel>();
-            builder.Services.AddSingleton<CalV1, CalculatorViewModel>();
-            builder.Services.AddSingleton<CalV2, CalculatorViewModel>();
+            builder.Services.AddSingleton<CalculatorViewModel>(); // Register CalculatorViewModel
 
+            builder.Services.AddSingleton<CalV1>(); // Register CalV1
+            builder.Services.AddSingleton<CalV2>(); // Register CalV2
 
             return builder.Build();
         }

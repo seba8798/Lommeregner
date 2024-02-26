@@ -24,6 +24,12 @@
             Command="{Binding NewCalculator}"
             />
 
+        <Label 
+    Text="CalV1"
+    FontSize="18"
+    TextColor="White"
+    VerticalOptions="CenterAndExpand" 
+    HorizontalOptions="CenterAndExpand" />
         <StackLayout BindingContext="{Binding}" BindableLayout.ItemsSource="{Binding Calculators}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
@@ -32,6 +38,24 @@
                             Command="{Binding BindingContext.OpenCalculator, Source={x:Reference MainPageInstance}}" 
                             CommandParameter="{Binding}"
                             />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+
+        <Label 
+    Text="CalV2"
+    FontSize="18"
+    TextColor="White"
+    VerticalOptions="CenterAndExpand" 
+    HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{Binding}" BindableLayout.ItemsSource="{Binding CalculatorsV2}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button Margin="5" 
+                    Text="{Binding Name}" 
+                    Command="{Binding BindingContext.OpenCalculatorV2, Source={x:Reference MainPageInstance}}" 
+                    CommandParameter="{Binding}"
+                    />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </StackLayout>

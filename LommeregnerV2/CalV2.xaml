@@ -23,8 +23,8 @@
 
 
         <!-- Calculator buttons -->
-        <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding V2BackButton}" VerticalOptions="Start" HorizontalOptions="Start"  />
-        <Button Grid.Row="0" Grid.Column="3" Text="Get Data" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding GetData}" Margin="0" VerticalOptions="Start" HorizontalOptions="End"  />
+        <Button Grid.Row="0" Grid.Column="0" Text="Go Back" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding BackButton}"  VerticalOptions="Start" HorizontalOptions="Start"  />
+        <Button Grid.Row="0" Grid.Column="3" Text="Save CalV2" TextColor="White" FontSize="15" BackgroundColor="#212121" Command="{Binding SaveButton}" CommandParameter="{Binding DisplayTextV2}" Margin="0" VerticalOptions="Start" HorizontalOptions="End"  />
 
 
         <Button Grid.Row="1" Grid.Column="0" Text="7" TextColor="White" BackgroundColor="#2F78C5" Command="{Binding NumberCommand}" CommandParameter="7" Margin="5" VerticalOptions="FillAndExpand"  />

@@ -9,11 +9,11 @@ namespace LommeregnerV2
         public DateTime CreationTime { get; }
         public string Name { get; set; }
 
-        public CalV1()
+        public CalV1(MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
             CreationTime = DateTime.Now;
-            _viewModel = new CalculatorViewModel();
+            _viewModel = new CalculatorViewModel(mainPageViewModel);
             BindingContext = _viewModel;
         }
     }

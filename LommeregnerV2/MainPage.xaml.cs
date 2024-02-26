@@ -8,18 +8,25 @@ namespace LommeregnerV2
     {
         public MainPage()
         {
+            // Tilmeld OnMainPageAppearing til Loaded event
             App.Current.MainPage.Loaded += OnMainPageAppearing;
+
             InitializeComponent();
+
+            // Sæt BindingContext
             BindingContext = new MainPageViewModel();
         }
         private async void OnMainPageAppearing(object sender, EventArgs e)
         {
-            App.Current.MainPage.Appearing -= OnMainPageAppearing; // Unsubscribe after first run
+            // Unsubscribe tilmelding efter første kørsel
+            App.Current.MainPage.Appearing -= OnMainPageAppearing;
 
+            // Tjek om appen er kørt før
             bool hasBeenRunBefore = Preferences.Get("HasBeenRunBefore", false);
 
             if (!hasBeenRunBefore)
             {
+                // Opret CancellationTokenSource
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
                 string text = "Welcome";

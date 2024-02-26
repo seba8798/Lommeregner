@@ -1,4 +1,7 @@
 using LommeregnerV2.ViewModel;
+using System.Web;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace LommeregnerV2;
 
@@ -9,16 +12,11 @@ public partial class CalV2 : ContentPage
     public DateTime CreationTime { get; }
     public string Name { get; set; }
 
-    public CalV2(CalculatorViewModel viewModel)
+    public CalV2(CalculatorViewModel calculatorViewModel, string displayTextV1)
     {
         InitializeComponent();
-        _viewModel = viewModel;  // Use the passed in view model
+        _viewModel = calculatorViewModel; 
         BindingContext = _viewModel;
-        Name = string.Empty;
-    }
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        _viewModel.DisplayTextV2 = DisplayText;
+        _viewModel.DisplayTextV2 = displayTextV1;
     }
 }
